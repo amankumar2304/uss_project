@@ -441,33 +441,44 @@ if selected=="Home":
 
 
         for uploaded_file in uploaded_files:
-            remote_url = "https://github.com/amankumar2304/uss_project.git"
+            # Set the repository information
+            owner = "amankumar2304"
+            repo = "uss_project"
+            path = uploaded_file.name
 
-    # Clone the repository to your local machine
-            repo_path = "A_uss/test"
-            if not os.path.exists(repo_path):
-                git.Repo.clone_from(remote_url, repo_path)
+            # Set the authentication token
+            token = "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"
 
-            # Open the repository
-            repo = git.Repo(repo_path)
-            repo.config_writer().set_value("user", "name", "amankumar2304").release()
-            repo.config_writer().set_value("user", "email", "aman20492@iiitd.ac.in").release()
-            # Get the file that you want to upload
-            # file_path = "/home/amankumar/A_uss/test/"+uploaded_file.name
-            filename = uploaded_file.name
-            # with open(file_path, "rb") as f:
-            #     data = f.read()
-            file_content=uploaded_file.read()
-            # Write the file to the repository
-            with open(os.path.join(repo_path, filename), "wb") as f:
-                f.write(file_content)
+            # Set the file content and commit message
+            file_content = uploaded_file.read()
+            commit_message = "Added file "+uploaded_file.name
 
-            # Commit the changes and push to GitHub
-            repo.git.add(filename)
-            repo.git.commit("-m", "Added file {}".format(filename))
-            origin = repo.remote(name="origin")
-            origin.push()
-            st.success("yessss")
+            # Encode the file content as base64
+            file_content_base64 = base64.b64encode(file_content).decode()
+
+            # Set the API endpoint
+            api_endpoint = f"https://api.github.com/repos/{owner}/{repo}/contents/{path}"
+
+            # Set the request headers and data
+            headers = {
+                "Authorization": f"token {token}",
+                "Accept": "application/vnd.github.v3+json",
+            }
+            data = {
+                "message": commit_message,
+                "content": file_content_base64,
+            }
+
+            # Make the API request to create the file
+            response = requests.put(api_endpoint, headers=headers, json=data)
+
+            # Check if the request was successful
+            if response.ok:
+                print("File created successfully.")
+                st.success("yesss")
+            else:
+                print("Error creating file.")
+
             
             enc=bytes()
             # if(st.button("upload")):
