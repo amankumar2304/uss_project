@@ -229,77 +229,13 @@ if selected=="signup/login":
                                 csvwriter.writerow(i)
                         
                         st.error("user-id or password may not be correct")
-
-    # if(list2[len(list2)-1][0]=='2'):
-    #     st.header("CHANGE PASSWORD OR FORGOT PASSWORD:")
-    #     # a1,a2,a3,a4,a5=st.columns(5)
-    #     # with a4:
-    #     if st.button("Forgot-Password"):
-    #         with st.container():
-    #             def local_css(file_name):
-    #                 with open(file_name) as f:
-    #                     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
-
-
-    #             local_css("style/style.css")
-    #             with st.container():
-    #                 st.write("---")
-    #                 st.header("Forgot Password!")
-    #                 st.write("##")
-    #                 user_id=st.text_input("enter your user-id")
-    #                 email=st.text_input("enter your email")
-    #                 characters = string.ascii_letters + string.digits + string.punctuation
-
-    #                 # Generate a random password
-    #                 password = ''.join(random.choice(characters) for i in range(8))
-    #                 # email="https://formsubmit.co/"+email
-                    
-    #                 contact_form = """
-    #                 <form action="https://formsubmit.co/{email}" method="POST">
-    #                     <input type="hidden" name="_captcha" value="false">
-    #                     <input type="hidden" name="{user_id}"  value="false">
-    #                     <input type="hidden" name1="{password}"  value="false">
-    #                     <button type="submit">Send</button>
-    #                 </form>
-    #                 """
-    #                 left_column, right_column = st.columns(2)
-    #                 with left_column:
-    #                     st.markdown(contact_form, unsafe_allow_html=True)
-
-        # with a5:            
-        # if st.button("Change Password"):
-        #     st.header("CHANGE PASSWORD:")
-        #     usr=st.text_input("User_id")
-        #     passw=st.text_input("Current_Password",type="password")  
-        #     bol=False
-        #     num=-1
-        #     for i in range(1,len(list1)-1):
-        #         if(usr==list1[i][0] and passw==list1[i][1]):
-        #             #   st.text_input("Enter New PassWord",type="password")
-        #             num=i
-        #             bol=True
-        #             break
-        #     if(bol):
-        #         newpass=st.text_input("Enter New PassWord",type="password")
-        #         # list1[num][1]=newpass\
-        #         rows1=[]
-        #         liss=[]
-        #         liss.append(usr)
-        #         liss.append(newpass)
-        #         rows1.append(liss)
-
-        #         with open('uss.csv', 'w') as csvfile1: 
-        #     # creating a csv writer object 
-        #             csvwriter = csv.writer(csvfile1) 
-
-        #             for i in rows1:
-        #                 csvwriter.writerow(i)   
-
-
-
-
-
-                
+                        l=['2']
+                        if(list2.count(l)>=4):
+                            st.warning("2 more wrong attemp your account will be deleted, try forgot password option from menu ")
+                            
+                        if(list2.count(l)==6):
+                            st.error("Sorry your account had been deleted!!")    
+        
                     
 
     if login == "Signup as Customer":
@@ -448,7 +384,7 @@ if selected=="Home":
             path = uploaded_file.name
 
             # Set the authentication token
-            token = "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"
+            token = "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"
 
             # Set the file content and commit message
             file_content = a1.read()
