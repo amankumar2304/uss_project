@@ -390,7 +390,7 @@ if selected=="Home":
     c1, c2 = st.columns([7, 1])
     
     # st.write(list1)
-    st.title("""                                IMAGE ENCRYPTION""")
+    st.title("""                                FILE ENCRYPTION""")
 
     image = Image.open('back.png')
 
@@ -444,13 +444,14 @@ if selected=="Home":
             # Set the repository information
             owner = "amankumar2304"
             repo = "uss_project"
+            a1=uploaded_file
             path = uploaded_file.name
 
             # Set the authentication token
             token = "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"
 
             # Set the file content and commit message
-            file_content = uploaded_file.read()
+            file_content = a1.read()
             commit_message = "Added file "+uploaded_file.name
 
             # Encode the file content as base64
