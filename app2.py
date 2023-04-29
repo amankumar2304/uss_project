@@ -448,7 +448,7 @@ if selected=="Home":
             path = uploaded_file.name
 
             # Set the authentication token
-            token = "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"
+            token = "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"
 
             # Set the file content and commit message
             file_content = a1.read()
